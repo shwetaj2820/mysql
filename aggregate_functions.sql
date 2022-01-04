@@ -1,15 +1,23 @@
-SELECT title,author_lname FROM books;
+SELECT MIN(released_year) FROM books;
 
-SELECT title,author_lname FROM books GROUP BY author_lname;
+SELECT MIN(pages) FROM books;
 
-SELECT author_lname,COUNT(*) FROM books GROUP BY author_lname;
+SELECT MAX(released_year) FROM books;
 
-SELECT title,author_fname,author_lname FROM books;
+SELECT MAX(pages),title FROM books; #returns incorrect output
 
-SELECT title,author_fname,author_lname FROM books GROUP BY author_lname,author_fname;
+#hence use sub-queries
 
-SELECT title,author_fname,author_lname FROM books GROUP BY author_lname;
+SELECT * FROM books 
+WHERE pages = (SELECT MIN(pages) FROM books);
 
-SELECT author_fname,author_lname,COUNT(*) FROM books GROUP by released_year;
+#method 2 - use order by
 
-SELECT CONCAT('In ',released_year,' ',COUNT(*),' books were released') AS year FROM books GROUP BY released_year;
+SELECT * FROM books ORDER BY pages LIMIT 1; #TO GET SHORTEST BOOK
+
+SELECT * FROM books ORDER BY pages DESC LIMIT 1; #TO GET THE LONGEST BOOK
+
+#method 3 - use group by
+
+SELECT author_fname,author_lname,MIN(released_year) FROM books GROUP BY author_lname,author_fname; #TO FIND OLDEST BOOK OF AUTHOR
+
