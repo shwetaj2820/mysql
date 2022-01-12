@@ -1,13 +1,14 @@
-#STORING TEXT
-# CHAR -faster for fixed length text - hence it is fixed length (the trailing characters are truncated)
-# VARCHAR - variable length string
+#INT - INTEGER 
+#DECIMAL(precision,scale)
 
-CREATE TABLE dogs(
-    name CHAR(5),
-    breed VARCHAR(10)
-);
+CREATE TABLE items(price DECIMAL(5,2));
 
-INSERT INTO dogs(name,breed) VALUES('bob','beagle') , ('robby','corgi') , ('Princess Jane','Retriever') , ('Princess Jane','dhfurnfdjfhsdue');
+INSERT INTO items(price) VALUES(7);
 
-SELECT * FROM dogs;
+INSERT INTO items(price) VALUES(237401837);
 
+INSERT INTO items(price) VALUES(299.99999);
+
+INSERT INTO items(price) VALUES(1.9999);
+
+SELECT * FROM items;
