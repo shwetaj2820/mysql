@@ -1,14 +1,11 @@
-#INT - INTEGER 
-#DECIMAL(precision,scale)
+# FLOAT and DOUBLE ARE floating types and calculations are approximate - hence store larger numbers with less space
+# DECIMAL is fixed point and calculation is exact
 
-CREATE TABLE items(price DECIMAL(5,2));
+# float - 4 bytes - precision issue after 7 digits
+# double - 8 bytes - precision issue after 15 digits
 
-INSERT INTO items(price) VALUES(7);
+CREATE TABLE things(price FLOAT);
 
-INSERT INTO items(price) VALUES(237401837);
+INSERT INTO things(price) VALUES(88.45),(8877.45),(8877665544.45);
 
-INSERT INTO items(price) VALUES(299.99999);
-
-INSERT INTO items(price) VALUES(1.9999);
-
-SELECT * FROM items;
+SELECT * FROM things;
