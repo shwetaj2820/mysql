@@ -1,11 +1,14 @@
-# date formatting
+#date math 
+# DATEDIFF(expression1,expression2) DIFFERENCE BETWEEN 2 DATES
 
-SELECT DATE_FORMAT('2000-09-28 22:23:00' , '%W%M%Y');    #using specifiers
+SELECT DATEDIFF(NOW(),birthdate) FROM people;
 
-SELECT CONCAT(MONTHNAME(birthdate),' ',DAY(birthdate),' ',YEAR(birthdate)) FROM people;
+SELECT birthdt,DATE_ADD(birthdt,INTERVAL 1 MONTH) FROM people;
 
-SELECT name,DATE_FORMAT(birthdt,'was born on %W') FROM people;
+SELECT birthdt,DATE_ADD(birthdt,INTERVAL 3 QUARTER) FROM people;
 
-SELECT DATE_FORMAT(birthdt,'%d/%m/%Y') FROM people;
+SELECT birthdt,birthdt+INTERVAL 1 MONTH FROM people;
 
-SELECT DATE_FORMAT(birthdt,'%d/%m%/%Y at %h:%i') FROM people;
+SELECT birthdt,DATE_SUB(birthdt,INTERVAL 1 MONTH) FROM people;
+
+SELECT birthdt,birthdt-INTERVAL 1 MONTH FROM people;
