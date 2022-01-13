@@ -1,14 +1,26 @@
-#date math 
-# DATEDIFF(expression1,expression2) DIFFERENCE BETWEEN 2 DATES
+CREATE TABLE comments(
+    content VARCHAR(100),
+    created_at TIMESTAMP DEFAULT NOW()
+);
 
-SELECT DATEDIFF(NOW(),birthdate) FROM people;
+INSERT INTO comments(content) VALUES('funny article'),('I found this offensive');
 
-SELECT birthdt,DATE_ADD(birthdt,INTERVAL 1 MONTH) FROM people;
+SELECT * FROM comments;
 
-SELECT birthdt,DATE_ADD(birthdt,INTERVAL 3 QUARTER) FROM people;
+SELECT * FROM comments ORDER BY created_at DESC;
 
-SELECT birthdt,birthdt+INTERVAL 1 MONTH FROM people;
+CREATE TABLE comments2(
+    content VARCHAR(100),
+    changed_at TIMESTAMP DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP # also can use : ON UPDATE NOW()
+);
 
-SELECT birthdt,DATE_SUB(birthdt,INTERVAL 1 MONTH) FROM people;
+INSERT INTO comments2(content) VALUES
+('gibberish'),('lolololol'),('i like cats');
 
-SELECT birthdt,birthdt-INTERVAL 1 MONTH FROM people;
+UPDATE comments2 SET content = 'this is not gibberish' WHERE content = 'gibberish';
+
+SELECT * FROM comments2;
+
+SELECT * FROM comments2 ORDER BY changed_at;
+
+
