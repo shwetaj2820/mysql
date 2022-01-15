@@ -1,26 +1,8 @@
-CREATE TABLE comments(
-    content VARCHAR(100),
-    created_at TIMESTAMP DEFAULT NOW()
-);
 
-INSERT INTO comments(content) VALUES('funny article'),('I found this offensive');
+# casting - converting data types
+SELECT CAST('2017-09-23' AS DATETIME);
 
-SELECT * FROM comments;
+SELECT name,birthdt FROM people WHERE birthdt BETWEEN '1980-01-01' AND '2000-01-01' ORDER BY birthdt; # the dates are treated as strings
 
-SELECT * FROM comments ORDER BY created_at DESC;
-
-CREATE TABLE comments2(
-    content VARCHAR(100),
-    changed_at TIMESTAMP DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP # also can use : ON UPDATE NOW()
-);
-
-INSERT INTO comments2(content) VALUES
-('gibberish'),('lolololol'),('i like cats');
-
-UPDATE comments2 SET content = 'this is not gibberish' WHERE content = 'gibberish';
-
-SELECT * FROM comments2;
-
-SELECT * FROM comments2 ORDER BY changed_at;
-
-
+#better option - casting string to datetime
+SELECT name,birthdt FROM people WHERE birthdt BETWEEN CAST('1980-01-01' AS DATETIME) AND CAST('2000-01-01' AS DATETIME) ORDER BY birthdt;
