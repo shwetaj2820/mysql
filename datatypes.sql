@@ -1,15 +1,33 @@
-# using IN 
-# select all books written by Carver or Lahiri or Smith
+# CASE STATEMENTS
+# mention genre as : if released year >  2000 then genre = modern lit ; else genre = 20th century lit
 
-SELECT title,author_lname FROM books WHERE author_lname='Carver' OR author_lname='Lahiri' OR author_lname='Smith';
+# CASE 
+	# WHEN .. THEN
+	# ELSE
+# END AS
+SELECT title,released_year ,
+	CASE 
+		WHEN released_year >=2000 THEN 'Modern Lit'
+		ELSE '20th Century Lit'
+	END AS GENRE
+FROM books;
 
-SELECT title,author_lname FROM books WHERE author_lname IN('Carver','Lahiri','Smith');
 
-# using NOT IN 
-# select all books where release year is not even 
-SELECT title,released_year FROM books WHERE released_year NOT IN (2000,2002,2004,2006,2008,2010,2012,2014,2016);
+SELECT title,stock_quantity ,
+	CASE 
+		WHEN stock_quantity BETWEEN 0 AND 50 THEN '*'
+		WHEN stock_quantity BETWEEN 51 AND 100 THEN '**'
+		ELSE '***'
+	END AS stock 
+FROM books;
 
-SELECT title,released_year FROM books WHERE released_year>=2000 AND released_year NOT IN (2000,2002,2004,2006,2008,2010,2012,2014,2016) 
-ORDER BY released_year;
+# alternative to above 
+SELECT title,stock_quantity ,
+	CASE 
+		WHEN stock_quantity <=50 THEN '*'
+		WHEN stock_quantity <=100 THEN '**'
+		ELSE '***'
+	END AS stock 
+FROM books;
 
-SELECT title,released_year FROM books WHERE released_year>=2000 AND released_year%2 != 0 ORDER BY released_year;
+
