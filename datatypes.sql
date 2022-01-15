@@ -1,26 +1,13 @@
-CREATE TABLE comments(
-    content VARCHAR(100),
-    created_at TIMESTAMP DEFAULT NOW()
-);
+# BETWEEN X AND Y
+# select all books published between 2004 and 2015
 
-INSERT INTO comments(content) VALUES('funny article'),('I found this offensive');
+SELECT title,released_year FROM books WHERE released_year>=2004 AND released_year<=2015 ORDER BY released_year;
 
-SELECT * FROM comments;
+SELECT title,released_year FROM books WHERE released_year BETWEEN 2004 AND 2015 ORDER BY released_year;
 
-SELECT * FROM comments ORDER BY created_at DESC;
+# NOT BETWEEN X AND Y
+# select all books not published between 2004 and 2015
 
-CREATE TABLE comments2(
-    content VARCHAR(100),
-    changed_at TIMESTAMP DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP # also can use : ON UPDATE NOW()
-);
+SELECT title,released_year FROM books WHERE released_year<=2004 OR released_year>=2015 ORDER BY released_year;
 
-INSERT INTO comments2(content) VALUES
-('gibberish'),('lolololol'),('i like cats');
-
-UPDATE comments2 SET content = 'this is not gibberish' WHERE content = 'gibberish';
-
-SELECT * FROM comments2;
-
-SELECT * FROM comments2 ORDER BY changed_at;
-
-
+SELECT title,released_year FROM books WHERE released_year NOT BETWEEN 2004 AND 2015 ORDER BY released_year;
