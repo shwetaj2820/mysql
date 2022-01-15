@@ -1,26 +1,33 @@
-CREATE TABLE comments(
-    content VARCHAR(100),
-    created_at TIMESTAMP DEFAULT NOW()
-);
+# CASE STATEMENTS
+# mention genre as : if released year >  2000 then genre = modern lit ; else genre = 20th century lit
 
-INSERT INTO comments(content) VALUES('funny article'),('I found this offensive');
+# CASE 
+	# WHEN .. THEN
+	# ELSE
+# END AS
+SELECT title,released_year ,
+	CASE 
+		WHEN released_year >=2000 THEN 'Modern Lit'
+		ELSE '20th Century Lit'
+	END AS GENRE
+FROM books;
 
-SELECT * FROM comments;
 
-SELECT * FROM comments ORDER BY created_at DESC;
+SELECT title,stock_quantity ,
+	CASE 
+		WHEN stock_quantity BETWEEN 0 AND 50 THEN '*'
+		WHEN stock_quantity BETWEEN 51 AND 100 THEN '**'
+		ELSE '***'
+	END AS stock 
+FROM books;
 
-CREATE TABLE comments2(
-    content VARCHAR(100),
-    changed_at TIMESTAMP DEFAULT NOW() ON UPDATE CURRENT_TIMESTAMP # also can use : ON UPDATE NOW()
-);
-
-INSERT INTO comments2(content) VALUES
-('gibberish'),('lolololol'),('i like cats');
-
-UPDATE comments2 SET content = 'this is not gibberish' WHERE content = 'gibberish';
-
-SELECT * FROM comments2;
-
-SELECT * FROM comments2 ORDER BY changed_at;
+# alternative to above 
+SELECT title,stock_quantity ,
+	CASE 
+		WHEN stock_quantity <=50 THEN '*'
+		WHEN stock_quantity <=100 THEN '**'
+		ELSE '***'
+	END AS stock 
+FROM books;
 
 
