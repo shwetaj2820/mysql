@@ -1,16 +1,30 @@
-SELECT * FROM orders;
+# only select rows where userid = customerid
 
-# find orders placed by Boy George 
-SELECT * FROM customers WHERE last_name = 'George';
-SELECT * FROM orders WHERE customer_id=1;
+# SELECT * FROM customers,orders WHERE id = customer_id; - error: column id is ambiguous
 
-# combining above 2 queries
-SELECT * FROM orders WHERE customer_id=
-    (
-        SELECT id FROM customers WHERE last_name='George'
-    )
-;
+# hence pre-pend the table name before the column name //only take overlapping conditions
+# join data based on a condition
+# IMPLICIT INNER JOIN
+SELECT * FROM customers,orders 
+	WHERE customers.id = orders.customer_id;
 
-# USING CROSS JOIN - jamming each combination 
-SELECT * FROM customers,orders;
+SELECT first_name,last_name,order_date,amount FROM customers,orders 
+	WHERE customers.id = orders.customer_id;
 
+# EXPLICIT INNER JOIN
+SELECT * FROM customers 
+JOIN orders 
+	ON customers.id = orders.customer_id;
+
+SELECT first_name,last_name,order_date,amount FROM customers 
+JOIN orders 
+	ON customers.id = orders.customer_id;
+	
+SELECT first_name,last_name,order_date,amount FROM orders
+JOIN customers
+	ON orders.customer_id = customers.id;
+	
+# arbitrary example
+SELECT * FROM customers
+JOIN orders 
+	ON customers.id = orders.customer_id;
